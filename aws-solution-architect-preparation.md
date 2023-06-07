@@ -4,4 +4,5 @@
 3. **AWS Lake Formation** is used to manage a large amount of data in AWS
 4. The **Lustre file system** is an open-source, parallel file system that can be used for HPC applications
 5. **Amazon FSx** supports Lustre file systems and users pay for only the resources they use.
-6. 
+6. **aws placement group**: 
+7. 
