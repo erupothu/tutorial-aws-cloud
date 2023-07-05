@@ -75,41 +75,89 @@ AWS WAF:
 
 <details>
 <summary> Networking: </summary>
-VPC:
+<b>AWS Resource Access Manager (RAM)</b> 
+	is a service that enables you to easily and securely share AWS resources with any AWS account or within your AWS Organization. 
+	You can share AWS Transit Gateways, Subnets, AWS License Manager configurations, and Amazon Route 53 Resolver rules resources with RAM. 
+	RAM eliminates the need to create duplicate resources in multiple accounts, reducing the operational overhead of managing those resources in every single account you own
+<b>Route 53:</b>
+	Global service
+	Record Types: A, AAAA, CNAME, MX, TXT, PTR, CAA
+	Alias: no charge, alias name of resource domain name
+	Routing Policy: 
+		Simple routing:	demo.example.com(192.168.101.1,192.168.101.2,192.168.101.3,192.168.101.4) dynamic ip assign
+		Weighted: based on weight % route balencer work.
+		GeoLoaction: based on location connects ( Asia, North America etc)
+		latency: closest location or latency connects first
+		failover: based on health check primary and secondary IP address or dns assigned
+		Ip Based:( Allows CIDR block of Ip addresses)
+		multi value answer: (based on health check routes the traffic
+		Geoproximity: based on users in location can assign resources priority.
+	DNS hostnames: 
+		For non-default virtual private clouds that aren't created using the Amazon VPC wizard, this option is disabled by default
+		If you create a private hosted zone for a domain and create records in the zone without enabling DNS hostnames, private hosted zones aren't enabled.
+	DNS resolution: 
+		Private hosted zones accept DNS queries only from a VPC DNS server. 
+		The IP address of the VPC DNS server is the reserved IP address at the base of the VPC IPv4 network range plus two. 
+		Enabling DNS resolution allows you to use the VPC DNS server as a Resolver for performing DNS resolution.
+	If you have multiple resources that perform the same function, you can configure DNS failover so that Route 53 will route your traffic from an unhealthy resource to a healthy resource.
+	
+<b>VPC:</b>
   VPC endpoint to access Amazon SQS
   An internet gateway is a horizontally scaled, redundant, and highly available VPC component that allows communication between instances in your VPC and the internet
   AWS Site-to-Site VPN (aka VPN Connection) enables you to securely connect your on-premises network or branch office site to your Amazon Virtual Private Cloud (Amazon VPC).
   You can use a network address translation (NAT) instance in a public subnet in your VPC to enable instances in the private subnet to initiate outbound IPv4 traffic to the Internet or other AWS services, but prevent the instances from receiving inbound traffic initiated by someone on the Internet
-VPN CloudHub
+<b>VPN CloudHub</b>
   If you have multiple AWS Site-to-Site VPN connections, you can provide secure communication between sites using the AWS VPN CloudHub
   This enables your remote sites to communicate with each other, and not just with the VPC.
-Network ACLs: 
+<b>Network ACLs: </b>
   A network access control list (ACL) is an optional layer of security for your VPC that acts as a firewall for controlling traffic in and out of one or more subnets
-Security group
+<b>Security group</b>
   A security group acts as a virtual firewall that controls the traffic for one or more instances.)
 VPCs: 
   Amazon Virtual Private Cloud (Amazon VPC) enables you to launch AWS resources into a virtual network that you've defined.
-Subnets:
+<b>Subnets:</b>
   A subnet is a range of IP addresses in your VPC. After creating a VPC, you can add one or more subnets in each Availability Zone.
-Route tables: 
+<b>Route tables: </b>
   A route table contains a set of rules, called routes, that are used to determine where network traffic from your subnet or gateway is directed.
-Internet gateways: 
+<b>Internet gateways:</b> 
   An internet gateway is a horizontally scaled, redundant, and highly available VPC component that enables communication between your VPC and the internet.
-Egress only internet gateways: 
+<b>Egress only internet gateways: </b>
   An egress-only internet gateway is for use with IPv6 traffic only. To enable outbound-only internet communication over IPv4, use a NAT gateway instead.
-DHCP option sets: 
+<b>DHCP option sets:</b> 
   The Dynamic Host Configuration Protocol (DHCP) provides a standard for passing configuration information to hosts on a TCP/IP network.
-Elastic IP addresses: 
+<b>Elastic IP addresses:</b> 
   An Elastic IP address is a static IPv4 address designed for dynamic cloud computing
-VPC endpoints: 
+<b>VPC endpoints: </b>
   A VPC endpoint enables connections between a virtual private cloud (VPC) and supported services, without requiring that you use an internet gateway, NAT device, VPN connection, or AWS Direct Connect connection. Therefore, your VPC is not exposed to the public internet.
-VPC endpoint services: 
+<b>VPC endpoint services: </b>
   You can create your own application in your VPC and configure it as an AWS PrivateLink-powered service (referred to as an endpoint service). Other AWS principals can create a connection from their VPC to your endpoint service using an interface VPC endpoint or a Gateway Load Balancer endpoint, depending on the type of service
-NAT gateways: 
+<b>NAT gateways: </b>
   You can use a network address translation (NAT) gateway to enable instances in a private subnet to connect to services outside your VPC but prevent such external services from initiating a connection with those instances. There are two types of NAT gateways: public and private.
   A public NAT gateway enables instances in private subnets to connect to the internet but prevents them from receiving unsolicited inbound connections from the internet. You should associate an elastic IP address with a public NAT gateway and attach an internet gateway to the VPC containing it.
   A private NAT gateway enables instances in private subnets to connect to other VPCs or your on-premises network but prevents any unsolicited inbound connections from outside your VPC. You can route traffic from the NAT gateway through a transit gateway or a virtual private gateway.
-  
+Peering connections:
+	A VPC peering connection is a networking connection between two VPCs that enables you to route traffic between them privately. 
+	Instances in either VPC can communicate with each other as if they are within the same network.
+Customer gateway:
+	A customer gateway device is a physical or software appliance that you own or manage in your on-premises network (on your side of a site-to-site VPN connection).
+Virtual private gateway:
+	A virtual private gateway is the VPN concentrator on the Amazon side of the site-to-site VPN connection. 
+VPN connections:
+	By default, instances that you launch into an Amazon VPC can't communicate with your own (remote) network. You can enable access to your remote network from your VPC by creating an AWS Site-to-Site VPN (Site-to-Site VPN) connection, and configuring routing to pass traffic through the connection.
+Transit gateway:
+	A transit gateway enables you to attach VPCs and VPN connections in the same Region and route traffic between them. 
+	A transit gateway works across AWS accounts, and you can use AWS RAM to share your transit gateway with other accounts. 
+Transit gateway attachments:
+	A transit gateway enables you to attach VPCs and VPN connections in the same Region and route traffic between them.
+	 A user from either account can delete the attachment at any time.
+Transit gateway route table:
+	Use transit gateway route tables to configure routing for your transit gateway attachments.
+Multicast on transit gateways:
+	Multicast is a communication protocol used for delivering a single stream of data to multiple receiving computers simultaneously. Transit gateway supports routing multicast traffic between subnets of attached VPCs, and it serves as a multicast router for instances sending traffic destined for multiple receiving instances.
+Network Manager:
+	Manage and monitor your AWS network
+Amazon VPC IP Address Manager:
+	Managed IP address management service
 </details>
 
 <details>
@@ -375,6 +423,7 @@ Graphs: Neptune
 Ledger: Quantom Ledger Database
 Time seeries: Amazon Time series
 RDS:
+  you can enable storage autoscaling for an Amazon RDS DB instance, Free available space is less than 10 percent of the allocated storage
   RDS Proxy
   RDS Security
   Aurora MySql:
