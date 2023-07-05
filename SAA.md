@@ -7,6 +7,11 @@ Hello
   AWS CloudTrail:
     Continuously log your AWS account activity
     Compliance aid, Data exfiltration, Operational issue troubleshooting, Security analysis
+  CloudWatch:
+	Amazon CloudWatch is a monitoring and observability service built for DevOps engineers, developers, site reliability engineers (SREs), and IT managers
+	CloudWatch provides you with data and actionable insights to monitor your applications, respond to system-wide performance changes, optimize resource utilization, and get a unified view of operational health. 
+	Amazon CloudWatch allows you to monitor AWS cloud resources and the applications you run on AWS.
+	You can use CloudWatch Alarms to send an email via SNS whenever any of the EC2 instances breaches a certain threshold
 </details>
 
 <details>
@@ -24,8 +29,20 @@ IAM:
     Security Tools
     IAM Acces Advisor
     Reports
+Secrets Manager:
+  AWS Secrets Manager helps you protect secrets needed to access your applications, services, and IT resources.
+  The service enables you to easily rotate, manage, and retrieve database credentials, API keys, and other secrets throughout their lifecycle.
+  Secrets Manager offers secret rotation with built-in integration for Amazon RDS, Amazon Redshift, and Amazon DocumentDB. The correct answer here is Secrets Manager
 Certificate Manager:
   A service that provides a highly available private CA without the upfront investment and ongoing maintenance costs of operating your own private CA.
+  AWS Certificate Manager is a service that lets you easily provision, manage, and deploy public and private Secure Sockets Layer/Transport Layer Security (SSL/TLS) certificates for use with AWS services and your internal connected resources.
+  SSL/TLS certificates are used to secure network communications and establish the identity of websites over the Internet as well as resources on private networks.
+AWS Config
+  AWS Config is a service that enables you to assess, audit, and evaluate the configurations of your AWS resources.
+  AWS Config provides a detailed view of the configuration of AWS resources in your AWS account.
+  This includes how the resources are related to one another and how they were configured in the past so that you can see how the configurations and relationships change over time
+  You can leverage an AWS Config managed rule to check if any ACM certificates in your account are marked for expiration within the specified number of days.
+  Certificates provided by ACM are automatically renewed. ACM does not automatically renew the certificates that you import.
 Key Management Service(KMS)
   A service that helps you create and manage keys and control the use of encryption across a wide range of AWS services and in your applications.
   Easily create keys and control encryption across AWS and beyond
@@ -158,6 +175,10 @@ Network Manager:
 	Manage and monitor your AWS network
 Amazon VPC IP Address Manager:
 	Managed IP address management service
+Private Link:
+	AWS PrivateLink provides private connectivity between VPCs, AWS services, and on-premises applications, securely on the Amazon network.
+	connection between an application that is fronted by an NLB in an account, and an Elastic Network Interface (ENI) in another account, without the need of VPC peering, and allowing the connections between the two to remain within the AWS network
+	
 </details>
 
 <details>
@@ -169,7 +190,21 @@ Amazon VPC IP Address Manager:
 <h4>EC2</h4>
   <b>Instances:</b>
     EC2: connect (EC2 connect,session manager, ssh client, EC2 serial console), Roles, EFS or FSx Support within subnet for EFS or FSx /mnt/efs/fs1/
-    Spot, Reserved, Dedicated, saving plan, scheduled, capacity reservation
+    Spot, 
+    Reserved, 
+    On-Demand Instances:
+    	On-Demand Instances, you pay for compute capacity by the second with no long-term commitments. 
+	You have full control over its lifecycle—you decide when to launch, stop, hibernate, start, reboot, or terminate it.
+	Hardware isolation is not possible
+    Dedicated:
+	deducated Instance:
+		Dedicated Instances are Amazon EC2 instances that run in a virtual private cloud (VPC) on hardware that's dedicated to a single customer.
+	dedicated Host:
+		A Dedicated Host is also a physical server that's dedicated for your use. With a Dedicated Host, you have visibility and control over how instances are placed on the server
+		Dedicated Hosts allow you to use your existing software licenses on EC2 instances
+    saving plan, 
+    scheduled, 
+    capacity reservation
     types: General purpose(M7g,T4g), Memory Optimised(R7g, X2gd), compute optimized (C7g), Storage Optimized(I4g, D3), accelarated Computing(P4, DL1, G5g), HPC Optimized(HPC7g) 
     Free Tier: Time:720hrs, Type:t2micro or t3 micro, EBS: 30GB, IO's: 1milllion, snapshot: 1GB, Bandwidth Internet: 100GB
     Template
@@ -181,7 +216,6 @@ Amazon VPC IP Address Manager:
 		packs instances close together inside an Availability Zone. This strategy enables workloads to achieve the low-latency network performance necessary for tightly-coupled node-to-node communication that is typical of HPC applications.
 	Spread – 
 		strictly places a small group of instances across distinct underlying hardware to reduce correlated failures
-		
   <b>Images:</b>
     AMI
     EC2 image builder (docker image, Amazon image)
@@ -198,7 +232,13 @@ Amazon VPC IP Address Manager:
   <b>LB:</b>
     ALB (HTTP, HTTPS), NLB (TCP, UDP, TLS), GLB (On Pemises)
     Target group: EC2, IP, ALB, Lambda
-  ASG: templates, size, policies, notifications
+  ASG: 
+    templates, size, policies, notifications
+    launch templates:
+	you specify information for the instances such as the ID of the Amazon Machine Image (AMI), the instance type, a key pair, one or more security groups, and a block device mapping.
+	you can provision capacity across multiple instance types using both On-Demand Instances and Spot Instances to achieve the desired scale, performance, and cost.
+    launch configuration:
+	you specify information for the instances such as the ID of the Amazon Machine Image (AMI), the instance type, a key pair, one or more security groups, and a block device mapping.
   
 <h4>ECS (Elastic container service):</h4>
   <b>Launch Types:</b> 
@@ -240,6 +280,8 @@ App Runner:
   Networking
   Observability
 SQS:
+	highly scalable hosted queue for storing messages as they travel between computers. Amazon SQS lets you easily move data between distributed application components and helps you build applications in which messages are processed independently
+	
 	consumer pull data
 	data deleted after consumed
 	can have many workers
@@ -292,6 +334,7 @@ Cloud Front:
 <details>
 <summary> Serverless </summary>
 Lambda:
+  you can run code without provisioning or managing servers. You pay only for the compute time that you consume
   short execution
   autoscaling automated
   multi programming language
@@ -320,6 +363,8 @@ API Gateway:
   Security:
   
 Step Function:
+  AWS Step Functions lets you coordinate multiple AWS services into serverless workflows so you can build and update apps quickly. 
+  stitch together services, such as AWS Lambda, AWS Fargate, and Amazon SageMaker, into feature-rich applications
   integrates SQS, SNS, Lambda, EC2 etc
   create a work flow
   
@@ -414,6 +459,7 @@ FSx:
 
 <details>
 <summary> Databases: </summary>
+You are not charged for the data transfer incurred in replicating data between your source DB instance and read replica within the same AWS Region
 RDBMS: RDS, Aurora great for joins
 NoSql : Dynamodb (JSON), Elasticache(key/value pair) Neptune (Graph), Document DB(MongoDB), Keyspaces(Cassendra)
 Object Store: S3
@@ -544,6 +590,8 @@ Lake formation:
 <details>
 <summary> Storage </summary>
 DataSync:
+  AWS DataSync is an online data transfer service that simplifies, automates, and accelerates copying large amounts of data between on-premises storage systems and AWS Storage services, as well as between AWS Storage services.
+  You can use AWS DataSync to migrate data located on-premises, at the edge, or in other clouds to Amazon S3, Amazon EFS, Amazon FSx for Windows File Server, Amazon FSx for Lustre, Amazon FSx for OpenZFS, and Amazon FSx for NetApp ONTAP.
   Onpremises 
   install Agent
   transfer from Onpremises  DataSync to s3, EFS, FSx
