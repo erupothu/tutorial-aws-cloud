@@ -118,33 +118,42 @@ NAT gateways:
 
 <details>
 <summary> Compute: </summary>
-EC2:
-  Instances:
+<h4>EC2</h4>
+  <b>Instances:</b>
     EC2: connect (EC2 connect,session manager, ssh client, EC2 serial console), Roles, EFS or FSx Support within subnet for EFS or FSx /mnt/efs/fs1/
     Spot, Reserved, Dedicated, saving plan, scheduled, capacity reservation
     types: General purpose(M7g,T4g), Memory Optimised(R7g, X2gd), compute optimized (C7g), Storage Optimized(I4g, D3), accelarated Computing(P4, DL1, G5g), HPC Optimized(HPC7g) 
     Free Tier: Time:720hrs, Type:t2micro or t3 micro, EBS: 30GB, IO's: 1milllion, snapshot: 1GB, Bandwidth Internet: 100GB
     Template
-  Images:
+  <b>Placement Groups:</b>
+	Partition – 
+		spreads your instances across logical partitions such that groups of instances in one partition do not share the underlying hardware with groups of instances in different partitions
+		This strategy is typically used by large distributed and replicated workloads, such as Hadoop, Cassandra, and Kafk
+	Cluster – 
+		packs instances close together inside an Availability Zone. This strategy enables workloads to achieve the low-latency network performance necessary for tightly-coupled node-to-node communication that is typical of HPC applications.
+	Spread – 
+		strictly places a small group of instances across distinct underlying hardware to reduce correlated failures
+		
+  <b>Images:</b>
     AMI
     EC2 image builder (docker image, Amazon image)
-  EBS:
+  <b>EBS:</b>
     Volumes
     snapshots
     Life cycle manager (Create, delete, retension, copy of snapshots and AMI)
-  Network & Security:
+  <b>Network & Security:</b>
     SG
     EIP
     Placement Groups: cluster, partition and spread
     key pairs
     Network Interface:
-  LB:
+  <b>LB:</b>
     ALB (HTTP, HTTPS), NLB (TCP, UDP, TLS), GLB (On Pemises)
     Target group: EC2, IP, ALB, Lambda
   ASG: templates, size, policies, notifications
   
-ECS (Elastic container service):
-  Launch Types: 
+<h4>ECS (Elastic container service):</h4>
+  <b>Launch Types:</b> 
     EC2 with ECS agent and Docker
     integrations ECR, Cloud watch logs, S3, Dynamodb
     Roles for each task
